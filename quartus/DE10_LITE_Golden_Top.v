@@ -127,13 +127,16 @@ module DE10_LITE_Golden_Top(
 //  REG/WIRE declarations
 //=======================================================
 
+wire [11:0] adc_res;
 
+	ADC_IP_CLK u0 (
+		.CLOCK (ADC_CLK_10), //      clk.clk
+		.RESET (KEY[0]), //    reset.reset
+		.CH0   (adc_res),   // readings.CH0
+	);
 
+assign LEDR[8:0] = adc_res[9:0];
 
-//=======================================================
-//  Structural coding
-//=======================================================
-
-
-
+assign LEDR[9] = KEY[1];	
+	
 endmodule
